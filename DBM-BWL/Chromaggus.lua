@@ -63,7 +63,7 @@ do
 				warnBreath:Show(args.spellName)
 				timerBreath:Start(2, args.spellName)
 				timerBreathCD:Start(60, args.spellName)
-				timerBreathCD:UpdateIcon(Incinerate[args.spellName])
+				timerBreathCD:UpdateIcon(spellIcons[args.spellName])
 			end
 		end
 	end
@@ -191,7 +191,7 @@ function mod:OnSync(msg, Name)
 	if msg == "Breath" and Name and self:AntiSpam(15, 1) then
 		warnBreath:Show(Name)
 		timerBreathCD:Start(Name)
-		timerBreathCD:UpdateIcon(Incinerate[Name])
+		timerBreathCD:UpdateIcon(spellIcons[Name])
 	elseif msg == "Frenzy" and self:AntiSpam(15, 2) then
 		warnFrenzy:Show()
 		timerFrenzy:Start()
