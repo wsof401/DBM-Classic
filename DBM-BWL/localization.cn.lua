@@ -86,19 +86,19 @@ L:SetWarningLocalization{
 	WarnBreath		= "%s"
 }
 L:SetTimerLocalization{
-	TimerBreathCD	= "%s冷却"
+	TimerBreathCD	= "%s冷却",
 	TimerBreath		= "%s施法",
 	TimerVulnCD		= "无敌冷却"
 }
 L:SetOptionLocalization{
 	WarnBreath		= "为克洛玛古斯其中一格吐息显示警告",
-	TimerBreathCD	= "显示吐息冷却"
+	TimerBreathCD	= "显示吐息冷却",
 	TimerBreath		= "显示吐息施法",
 	TimerVulnCD		= "显示无敌CD"
 }
 L:SetMiscLocalization{
 	Breath1	= "第一次吐息",
-	Breath2	= "第二次吐息"
+	Breath2	= "第二次吐息",
 	VulnEmote	= "%s的皮肤闪着微光，它畏缩了。"
 }
 
@@ -124,7 +124,7 @@ L:SetOptionLocalization{
 	WarnPhase			= "提示转换阶段"
 }
 L:SetMiscLocalization{
-	YellP1		= "比赛开始！"
+	YellP1		= "比赛开始！",
 	YellP2		= "干得好，我的手下。凡人的勇气开始消退了！现在，现在让我们看看他们如何应对黑石塔的真正主人的力量！！！",
 	YellP3		= "不可能！出现吧，我的仆人！再次为你们的主人效力！",
 	YellShaman	= "萨满祭司，让我看看你们的图腾到底是干什么用的！",
