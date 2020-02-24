@@ -121,17 +121,17 @@ L:SetOptionLocalization{
 }
 L:SetMiscLocalization{
 	YellP1		= "讓賽事開始吧！",
-	YellP2		= "幹得好",
-	YellP3		= "不可能",
-	YellShaman	= "薩滿",
-	YellPaladin	= "聖騎士",
-	YellDruid	= "德魯伊",
-	YellPriest	= "牧師",
-	YellWarrior	= "戰士",
-	YellRogue	= "盜賊",
-	YellWarlock	= "術士",
-	YellHunter	= "獵人",
-	YellMage	= "法師",
-	YellDK		= "死亡騎士",
-	YellMonk	= "武僧"
+    YellP2      = "幹得好，我的手下。凡人的勇氣開始消退!現在，現在讓我們看看他們如何應對黑石之王的力量!!!",
+    YellP3      = "不可能!出現吧，我的僕人!再次為我的主人服務!",
+    YellShaman  = "薩滿，讓我看看",
+    YellPaladin = "聖騎士...聽說你有無數條命。讓我看看到底是怎麼樣的吧。",
+    YellDruid   = "德魯伊和你們愚蠢的變身術。讓我們看看什麼會發生吧!",
+    YellPriest  = "牧師!如果你要繼續這麼治療的話，那我們來玩點有趣的東西!",
+    YellWarrior = "戰士，我知道你的力量不只如此!讓我們來見識一下吧!",
+    YellRogue   = "盜賊?不要躲了，面對我吧!",
+    YellWarlock = "術士，不要隨便去玩那些你不理解的法術。看看會發生什麼吧?",
+    YellHunter  = "獵人和你那討厭的豌豆射擊!",
+    YellMage    = "還有法師?你應該小心使用你的魔法...",
+    YellDK      = "死亡騎士們...來這。",
+    YellMonk    = "武僧"
 }
