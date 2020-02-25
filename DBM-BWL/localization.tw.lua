@@ -37,7 +37,7 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization("Broodlord")
 
 L:SetGeneralLocalization{
-	name	= "幼龍領主勒西雷爾"
+	name	= "勒西雷爾"
 }
 
 L:SetMiscLocalization{
@@ -122,8 +122,8 @@ L:SetOptionLocalization{
 L:SetMiscLocalization{
 	YellP1		= "讓賽事開始吧！",
 	YellP2 		= "幹得好，手下們。凡人的勇氣開始消退了！現在，我們就來看看他們怎麼面對黑石之王的力量吧！",
-    YellP3      = "不可能！来吧，我的僕人！再次為你们的主人服務！",
-    YellShaman  = "薩滿，讓我看看你圖騰到底是什麽用處的！",
+    YellP3      = "不可能！来吧，我的僕人！再次為你們的主人服務！",
+    YellShaman  = "薩滿，讓我看看你圖騰到底是什麼用處的！",
     YellPaladin = "聖騎士……聽說你有無數條命。讓我看看到底是怎麼樣的吧。",
     YellDruid   = "德魯伊和你們愚蠢的變形。讓我們看看什麼會發生吧！",
     YellPriest  = "牧師！如果你要繼續這麼治療的話，那我們來玩點有趣的東西！",
