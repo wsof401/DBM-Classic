@@ -16,7 +16,7 @@ L:SetOptionLocalization{
 	TimerAddsSpawn	= "為第一次小怪重生顯示計時器"
 }
 L:SetMiscLocalization{
-	Phase2Emote	= "在寶珠的控制力消失之前逃走。",
+	Phase2Emote	= "奈法利安的部隊在寶珠的控制力消失之前逃走。",
 	YellPull 	= "入侵者闖進孵化室了！拉響警報！無論如何都要保護蛋！"
 }
 -------------------
@@ -29,7 +29,7 @@ L:SetGeneralLocalization{
 }
 
 L:SetMiscLocalization{
-	Event	= "太遲了，朋友"
+	Event	= "太遲了，朋友！奈法利斯的腐化掌控了我…我已經無法…控制自己了。"
 }
 -----------------
 --  Broodlord  --
