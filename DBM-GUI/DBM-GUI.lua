@@ -3201,7 +3201,7 @@ local function CreateOptionsMenu()
 				DBM:PlaySoundFile(value)
 			end
 		end, 180)
-		VictorySoundDropdown2:SetPoint("LEFT", VictorySoundDropdown, "RIGHT", 70, 0)
+		VictorySoundDropdown2:SetPoint("LEFT", VictorySoundDropdown, "RIGHT", 45, 0)
 
 		local useCombined = DBM.Options.EventSoundMusicCombined
 		local DungeonMusicDropDown = eventSoundsGeneralArea:CreateDropdown(L.EventDungeonMusic, useCombined and DBM.Music or DBM.DungeonMusic, "DBM", "EventSoundDungeonBGM", function(value)
