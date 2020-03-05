@@ -32,7 +32,6 @@ local specWarnBronze	= mod:NewSpecialWarningYou(23170, nil, nil, nil, 1, 8)
 local timerBreath		= mod:NewCastTimer(2, "TimerBreath", 23316, nil, nil, 3)
 local timerBreathCD		= mod:NewTimer(60, "TimerBreathCD", 23316, nil, nil, 3)
 local timerFrenzy		= mod:NewBuffActiveTimer(8, 23128, nil, "Tank|RemoveEnrage", 2, 5, nil, DBM_CORE_TANK_ICON..DBM_CORE_ENRAGE_ICON)
-local timerVuln			= mod:NewTimer(17, "TimerVulnCD", 4166)-- seen 16.94 - 25.53, avg 21.8
 
 mod.vb.phase = 1
 local mydebuffs = 0
@@ -177,12 +176,6 @@ function mod:UNIT_HEALTH(uId)
 	end
 end
 
-function mod:CHAT_MSG_MONSTER_EMOTE(msg)
-	if (msg == L.VulnEmote or msg:find(L.VulnEmote)) then
-		self:SendSync("Vulnerable")
-	end
-end
-
 function mod:OnSync(msg, Name)
 	if self:AntiSpam(5, msg) then
 		--Do nothing, this is just an antispam threshold for syncing
@@ -198,7 +191,5 @@ function mod:OnSync(msg, Name)
 	elseif msg == "Phase2" and self.vb.phase < 2 then
 		self.vb.phase = 2
 		warnPhase2:Show()
-	elseif msg == "Vulnerable" then
-		timerVuln:Start()
 	end
 end
