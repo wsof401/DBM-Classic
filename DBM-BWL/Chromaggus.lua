@@ -80,7 +80,7 @@ local vulnSpells = {
 
 --Local Functions
 -- in theory this should only alert on a new vulnerability on your target or when you change target
-local function update_vulnerability()
+local function update_vulnerability(self)
 	local target = UnitGUID("target")
 	local tinfo	= vulnerabilities[target]
 	local cid = self:GetCIDFromGUID(target)
@@ -264,7 +264,7 @@ end
 
 function mod:PLAYER_TARGET_CHANGED()
 	check_target_vulns(self)
-	update_vulnerability()
+	update_vulnerability(self)
 end
 
 function mod:UNIT_HEALTH(uId)

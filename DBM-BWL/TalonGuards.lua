@@ -46,7 +46,7 @@ local vulnSpells = {
 
 --Local Functions
 -- in theory this should only alert on a new vulnerability on your target or when you change target
-local function update_vulnerability()
+local function update_vulnerability(self)
 	local target = UnitGUID("target")
 	local tinfo	= vulnerabilities[target]
 	local cid = self:GetCIDFromGUID(target)
@@ -57,9 +57,6 @@ local function update_vulnerability()
 	local info = spellInfo[tinfo[2]]
 	local name = L[info[1]] or info[1]
 
-	timerVuln:SetColor(info[2])
-	timerVuln:UpdateIcon(info[3])
-	timerVuln:UpdateName(name)
 	warnVuln.icon = info[3]
 	warnVuln:Show(name)
 end
@@ -108,5 +105,5 @@ end
 
 function mod:PLAYER_TARGET_CHANGED()
 	check_target_vulns(self)
-	update_vulnerability()
+	update_vulnerability(self)
 end
