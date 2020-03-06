@@ -54,12 +54,6 @@ local vulnerabilities = {
 }
 
 --Constants
-local vulnMobs = {
---	[12460] = "Death Talon Wyrmguard",
---	[12461] = "Death Talon Overseer",
-	[14020] = "Chromaggus",
-}
-
 -- https://wow.gamepedia.com/COMBAT_LOG_EVENT
 local spellInfo = {
 	[2] =	{"Holy",	{r=255, g=230, b=128},	"135924"},-- Smite
@@ -84,7 +78,7 @@ local function update_vulnerability(self)
 	local target = UnitGUID("target")
 	local tinfo	= vulnerabilities[target]
 	local cid = self:GetCIDFromGUID(target)
-	if tinfo == nil or vulnMobs[cid] == nil then
+	if tinfo == nil or cid ~= 14020 then
 		return
 	end
 
@@ -110,7 +104,7 @@ end
 local function check_target_vulns(self)
 	local target = UnitGUID("target")
 	local cid = self:GetCIDFromGUID(target)
-	if vulnMobs[cid] == nil then
+	if cid ~= 14020 then
 		return
 	end
 
