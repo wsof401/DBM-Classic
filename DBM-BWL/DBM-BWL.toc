@@ -26,7 +26,6 @@ localization.ru.lua
 localization.kr.lua
 localization.tw.lua
 localization.cn.lua
-Vulnerability.lua
 Razorgore.lua
 Vaelastrasz.lua
 Broodlord.lua
@@ -35,3 +34,4 @@ Ebonroc.lua
 Flamegor.lua
 Chromaggus.lua
 Nefarian.lua
+TalonGuards.lua

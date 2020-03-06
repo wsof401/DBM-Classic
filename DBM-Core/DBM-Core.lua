@@ -5703,7 +5703,7 @@ do
 				mod:RegisterEvents(unpack(mod.inCombatOnlyEvents))
 			end
 			--Fix for "attempt to perform arithmetic on field 'stats' (a nil value)"
-			if not mod.stats then
+			if not mod.stats and not mod.noStatistics then
 				self:AddMsg(DBM_CORE_BAD_LOAD)--Warn user that they should reload ui soon as they leave combat to get their mod to load correctly as soon as possible
 				mod.ignoreBestkill = true--Force this to true so we don't check any more occurances of "stats"
 			elseif event == "TIMER_RECOVERY" then --add a lag time to delay when TIMER_RECOVERY
@@ -5770,12 +5770,12 @@ do
 			--serperate timer recovery and normal start.
 			if event ~= "TIMER_RECOVERY" then
 				--add pull count
-				if mod.stats then
+				if mod.stats and not mod.noStatistics then
 					if not mod.stats[statVarTable[savedDifficulty].."Pulls"] then mod.stats[statVarTable[savedDifficulty].."Pulls"] = 0 end
 					mod.stats[statVarTable[savedDifficulty].."Pulls"] = mod.stats[statVarTable[savedDifficulty].."Pulls"] + 1
 				end
 				--show speed timer
-				if self.Options.AlwaysShowSpeedKillTimer and mod.stats and not mod.ignoreBestkill then
+				if self.Options.AlwaysShowSpeedKillTimer and mod.stats and not mod.ignoreBestkill and not mod.noStatistics then
 					local bestTime = mod.stats[statVarTable[savedDifficulty].."BestTime"]
 					if bestTime and bestTime > 0 then
 						local speedTimer = mod:NewTimer(bestTime, DBM_SPEED_KILL_TIMER_TEXT, "136106", nil, false)
@@ -5953,7 +5953,7 @@ do
 			end
 			local name = mod.combatInfo.name
 			local modId = mod.id
-			if wipe and mod.stats then
+			if wipe and mod.stats and not mod.noStatistics then
 				mod.lastWipeTime = GetTime()
 				--Fix for "attempt to perform arithmetic on field 'pull' (a nil value)" (which was actually caused by stats being nil, so we never did getTime on pull, fixing one SHOULD fix the other)
 				local thisTime = GetTime() - mod.combatInfo.pull
@@ -6007,7 +6007,7 @@ do
 					sendWhisper(k, msg)
 				end
 				fireEvent("DBM_Wipe", mod)
-			elseif not wipe and mod.stats then
+			elseif not wipe and mod.stats and not mod.noStatistics then
 				mod.lastKillTime = GetTime()
 				local thisTime = GetTime() - (mod.combatInfo.pull or 0)
 				local lastTime = mod.stats[statVarTable[savedDifficulty].."LastTime"]
