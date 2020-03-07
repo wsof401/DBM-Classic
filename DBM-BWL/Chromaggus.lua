@@ -292,7 +292,7 @@ function mod:OnSync(msg, Name)
 		warnPhase2:Show()
 	elseif msg == "Vulnerable" then
 		timerVuln:Start()
-		vulnerabilities = {}
-		self:check_target_vulns()
+		table.wipe(vulnerabilities)
+		check_target_vulns(self)
 	end
 end
