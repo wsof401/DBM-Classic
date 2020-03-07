@@ -78,9 +78,9 @@ local function check_target_vulns(self)
 	end
 
 	--for i = 1, 32 do
-		--local spellid = select(10, UnitBuff('target', i))
+		--local spellId = select(10, UnitBuff('target', i))
 		local spellId = select(10, DBM:UnitBuff("target", 22277, 22280, 22278, 22279, 22281)) or 0
-		local vulnSchool = vulnSpells[spellid]
+		local vulnSchool = vulnSpells[spellId]
 		if vulnSchool ~= nil then
 			return check_spell_damage(self, target, 10000, vulnSchool, false)
 		end
