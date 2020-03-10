@@ -2,7 +2,7 @@ if GetLocale() ~= "esES" then return end
 local L
 
 --------------------------------
--- Cavernas de Brazanegra (1) --
+-- Blackfathom Deeps (1) --
 --------------------------------
 --  Ghamoo-Ra  --
 -----------------------------
@@ -396,10 +396,10 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("Cookie")
 
 L:SetGeneralLocalization{
-	name 		= "Cocinitas"
+	name 		= "El Chef"
 }
 --------------------------------
--- La Masacre - 230J/429M (3) --
+-- Dire Maul - 230J/429M (3) --
 --------------------------------
 -- Zevrim Pezuñahendida --
 --------------------------
@@ -409,7 +409,7 @@ L:SetGeneralLocalization{
 	name 		= "Zevrim Pezuñahendida"
 }
 ------------------
--- Hidromilecio --
+-- Hydrospawn --
 ------------------
 L = DBM:GetModLocalization(403)
 
@@ -425,7 +425,7 @@ L:SetGeneralLocalization{
 	name 		= "Lethtendris"
 }
 --------------------------
--- Alzzin el Formaferal --
+-- Alzzin the Wildshaper --
 --------------------------
 L = DBM:GetModLocalization(405)
 
@@ -441,7 +441,7 @@ L:SetGeneralLocalization{
 	name 		= "Tendris Alabeo"
 }
 --------------------------
--- Illyanna Roblecuervo --
+-- Illyanna Ravenoak --
 --------------------------
 L = DBM:GetModLocalization(407)
 
