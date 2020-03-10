@@ -76,7 +76,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(371)
 
 L:SetGeneralLocalization{
-	name 		= "Maestro de canes Grebmar"
+	name 		= "Domador de jaurías Grebmar"
 }
 ---------------------------------------------------------
 -- Ring of Law --
@@ -92,7 +92,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(373)
 
 L:SetGeneralLocalization{
-	name 		= "Piromántico Fruto del Saber"
+	name 		= "Piromántico Cultugrano"
 }
 --------------------
 -- Lord Incendius --
@@ -132,7 +132,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(378)
 
 L:SetGeneralLocalization{
-	name 		= "General Forjainquina"
+	name 		= "General Forjira"
 }
 ---------------------------
 -- Golem Lord Argelmach --
@@ -214,7 +214,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(389)
 
 L:SetGeneralLocalization{
-	name 		= "Cazadora de las Sombras Vosh'gajin"
+	name 		= "Cazador de las Sombras Vosh'gajin"
 }
 -----------------------------
 --  War Master Voone  --
@@ -262,7 +262,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(395)
 
 L:SetGeneralLocalization{
-	name 		= "Gizrul el Esclavista"
+	name 		= "Gizrul el esclavista"
 }
 -----------------------------
 --  Overlord Wyrmthalak  --
@@ -313,7 +313,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("WarchiefRendBlackhand")
 
 L:SetGeneralLocalization{
-	name 		= "Jefe de Guerra Rend Puño Negro"
+	name 		= "Jefe de Guerra Desgarro Puño Negro"
 }
 -----------------------------
 --  The Beast  --
@@ -372,7 +372,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("MrSmite")
 
 L:SetGeneralLocalization{
-	name 		= "Don Mamporro"
+	name 		= "Sr. Golpin"
 }
 -----------------------------
 --  Captain Greenskin  --
@@ -380,7 +380,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("CaptainGreenskin")
 
 L:SetGeneralLocalization{
-	name 		= "Capitán Verdetez"
+	name 		= "Capitán Verdepel"
 }
 -----------------------------
 --  Edwin Van Cleef  --
@@ -433,12 +433,12 @@ L:SetGeneralLocalization{
 	name 		= "Alzzin el Formaferal"
 }
 --------------------
--- Tendris Alabeo --
+-- Tendris Warpwood --
 --------------------
 L = DBM:GetModLocalization(406)
 
 L:SetGeneralLocalization{
-	name 		= "Tendris Alabeo"
+	name 		= "Tendris Madeguerra"
 }
 --------------------------
 -- Illyanna Ravenoak --
@@ -454,7 +454,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(408)
 
 L:SetGeneralLocalization{
-	name 		= "Magister Kalendris"
+	name 		= "Magistral Kalendris"
 }
 ----------------
 -- Immol'thar --
@@ -837,7 +837,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("HoundmasterLoksey")
 
 L:SetGeneralLocalization{
-	name 		= "Maestro de canes Loksey"
+	name 		= "Domador de jaurías Loksey"
 }
 
 -----------------------------
@@ -1085,7 +1085,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization("Targorr")
 
 L:SetGeneralLocalization{
-	name 		= "Targorr el Pavoroso"
+	name 		= "Targor el Pavoroso"
 }
 -----------------------------
 --  Kam Deepfury  --
@@ -1154,7 +1154,7 @@ L:SetGeneralLocalization{
 L = DBM:GetModLocalization(749)
 
 L:SetGeneralLocalization{
-	name 		= "Malor el Fanático"
+	name 		= "Malor el Entusiasta"
 }
 
 -----------------------------
