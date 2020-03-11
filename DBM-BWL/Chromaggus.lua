@@ -55,6 +55,7 @@ local vulnerabilities = {
 
 --Constants
 -- https://wow.gamepedia.com/COMBAT_LOG_EVENT
+--Why this is coded to use localized names is beyond me
 local spellInfo = {
 	[2] =	{"Holy",	{r=255, g=230, b=128},	"135924"},-- Smite
 	[4] =	{"Fire",	{r=255, g=128, b=0},	"135808"},-- Pyroblast
@@ -83,6 +84,7 @@ local function update_vulnerability(self)
 	end
 
 	local info = spellInfo[tinfo[2]]
+	if not info then return end
 	local name = L[info[1]] or info[1]
 
 	timerVuln:SetColor(info[2])

@@ -91,7 +91,8 @@ L:SetMiscLocalization{
 	Nature		= "Nature",
 	Frost		= "Frost",
 	Shadow		= "Shadow",
-	Arcane		= "Arcane"
+	Arcane		= "Arcane",
+	Holy		= "Holy"
 }
 
 
@@ -127,7 +128,8 @@ L:SetMiscLocalization{
 	Nature		= "Nature",
 	Frost		= "Frost",
 	Shadow		= "Shadow",
-	Arcane		= "Arcane"
+	Arcane		= "Arcane",
+	Holy		= "Holy"
 }
 
 ----------------
