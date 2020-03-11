@@ -12,9 +12,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 23155 23169 23153 23154 23170 23128 23537",
 --	"SPELL_AURA_REFRESH",
 	"SPELL_AURA_REMOVED 23155 23169 23153 23154 23170 23128",
-	"SPELL_DAMAGE",
-	"SPELL_PERIODIC_DAMAGE",
-	"PLAYER_TARGET_CHANGED",
 	"UNIT_HEALTH mouseover target",
 	"CHAT_MSG_MONSTER_EMOTE"
 )
@@ -29,7 +26,7 @@ local warnFrenzy		= mod:NewSpellAnnounce(23128, 3, nil, "Tank|RemoveEnrage", 3)
 local warnPhase2Soon	= mod:NewPrePhaseAnnounce(2, 1)
 local warnPhase2		= mod:NewPhaseAnnounce(2)
 local warnMutation		= mod:NewCountAnnounce(23174, 4)
-local warnVuln			= mod:NewAnnounce("WarnVuln", 1)
+local warnVuln			= mod:NewAnnounce("WarnVulnerable", 1, false)
 
 local specWarnBronze	= mod:NewSpecialWarningYou(23170, nil, nil, nil, 1, 8)
 
@@ -37,6 +34,8 @@ local timerBreath		= mod:NewCastTimer(2, "TimerBreath", 23316, nil, nil, 3)
 local timerBreathCD		= mod:NewTimer(60, "TimerBreathCD", 23316, nil, nil, 3)
 local timerFrenzy		= mod:NewBuffActiveTimer(8, 23128, nil, "Tank|RemoveEnrage", 2, 5, nil, DBM_CORE_TANK_ICON..DBM_CORE_ENRAGE_ICON)
 local timerVuln			= mod:NewTimer(17, "TimerVulnCD")-- seen 16.94 - 25.53, avg 21.8
+
+mod:AddNamePlateOption("NPAuraOnVulnerable", 22277)
 
 mod.vb.phase = 1
 local mydebuffs = 0
@@ -50,12 +49,11 @@ local spellIcons = {
 }
 
 local vulnerabilities = {
-	-- [guid]: {topHit, school}
+	-- [guid] = school
 }
 
 --Constants
 -- https://wow.gamepedia.com/COMBAT_LOG_EVENT
---Why this is coded to use localized names is beyond me
 local spellInfo = {
 	[2] =	{"Holy",	{r=255, g=230, b=128},	"135924"},-- Smite
 	[4] =	{"Fire",	{r=255, g=128, b=0},	"135808"},-- Pyroblast
@@ -66,6 +64,7 @@ local spellInfo = {
 }
 
 local vulnSpells = {
+	--No Holy?
 	[22277] = 4,
 	[22280] = 8,
 	[22278] = 16,
@@ -77,13 +76,13 @@ local vulnSpells = {
 -- in theory this should only alert on a new vulnerability on your target or when you change target
 local function update_vulnerability(self)
 	local target = UnitGUID("target")
-	local tinfo	= vulnerabilities[target]
+	local spellSchool	= vulnerabilities[target]
 	local cid = self:GetCIDFromGUID(target)
-	if tinfo == nil or cid ~= 14020 then
+	if not spellSchool or cid ~= 14020 then
 		return
 	end
 
-	local info = spellInfo[tinfo[2]]
+	local info = spellInfo[spellSchool]
 	if not info then return end
 	local name = L[info[1]] or info[1]
 
@@ -92,14 +91,24 @@ local function update_vulnerability(self)
 	timerVuln:UpdateName(name)
 	warnVuln.icon = info[3]
 	warnVuln:Show(name)
+
+	if self.Options.NPAuraOnVulnerable then
+		DBM.Nameplate:Hide(true, target, 22277, 135924)
+		DBM.Nameplate:Hide(true, target, 22277, 135808)
+		DBM.Nameplate:Hide(true, target, 22277, 136006)
+		DBM.Nameplate:Hide(true, target, 22277, 135846)
+		DBM.Nameplate:Hide(true, target, 22277, 136197)
+		DBM.Nameplate:Hide(true, target, 22277, 136096)
+		DBM.Nameplate:Show(true, target, 22277, tonumber(info[3]))
+	end
 end
 
-local function check_spell_damage(self, target, amount, spellSchool, periodic)
-	local topVulnHit = vulnerabilities[target] and vulnerabilities[target][1] or 700
-	if amount > topVulnHit then
-		DBM:Debug("Update vuln "..tostring(amount)..' > '..tostring(topVulnHit)..' '..tostring(target))
-		vulnerabilities[target] = {amount, spellSchool}
-		update_vulnerability(self)
+local function check_spell_damage(self, target, amount, spellSchool, critical)
+	if amount > (critical and 1400 or 700) then
+		if not vulnerabilities[target] or vulnerabilities[target] ~= spellSchool then
+			vulnerabilities[target] = spellSchool
+			update_vulnerability(self)
+		end
 	end
 end
 
@@ -110,14 +119,11 @@ local function check_target_vulns(self)
 		return
 	end
 
-	--for i = 1, 32 do
-		--local spellId = select(10, UnitBuff('target', i))
-		local spellId = select(10, DBM:UnitBuff("target", 22277, 22280, 22278, 22279, 22281)) or 0
-		local vulnSchool = vulnSpells[spellId]
-		if vulnSchool ~= nil then
-			return check_spell_damage(self, target, 10000, vulnSchool, false)
-		end
-	--end
+	local spellId = select(10, DBM:UnitBuff("target", 22277, 22280, 22278, 22279, 22281)) or 0
+	local vulnSchool = vulnSpells[spellId]
+	if vulnSchool ~= nil then
+		return check_spell_damage(self, target, 10000, vulnSchool)
+	end
 end
 
 function mod:OnCombatStart(delay)
@@ -126,11 +132,23 @@ function mod:OnCombatStart(delay)
 	self.vb.phase = 1
 	mydebuffs = 0
 	table.wipe(vulnerabilities)
-	check_target_vulns(self)
+	if self.Options.WarnVulnerable then--Don't register high cpu combat log events if option isn't enabled
+		self:RegisterShortTermEvents(
+			"SPELL_DAMAGE"
+		)
+		check_target_vulns(self)
+		if self.Options.NPAuraOnVulnerable then
+			DBM:FireEvent("BossMod_EnableHostileNameplates")
+		end
+	end
 end
 
 function mod:OnCombatEnd()
 	table.wipe(vulnerabilities)
+	self:UnregisterShortTermEvents()
+	if self.Options.NPAuraOnVulnerable  then
+		DBM.Nameplate:Hide(true, nil, nil, nil, true, true)--isGUID, unit, spellId, texture, force, isHostile, isFriendly
+	end
 end
 
 do
@@ -251,17 +269,8 @@ do
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount)
-	check_spell_damage(self, destGUID, amount, spellSchool, false)
-end
-
-function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount)
-	check_spell_damage(self, destGUID, amount, spellSchool, true)
-end
-
-function mod:PLAYER_TARGET_CHANGED()
-	check_target_vulns(self)
-	update_vulnerability(self)
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount, _, _, _, _, _, critical)
+	check_spell_damage(self, destGUID, amount, spellSchool, critical)
 end
 
 function mod:UNIT_HEALTH(uId)

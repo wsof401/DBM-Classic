@@ -7,27 +7,21 @@ mod:SetModelID(12460)
 mod:RegisterCombat("combat")
 mod.noStatistics = true
 
-mod:RegisterEventsInCombat(
-	"SPELL_DAMAGE",
-	"SPELL_PERIODIC_DAMAGE",
-	"PLAYER_TARGET_CHANGED"
-)
+local warnVuln			= mod:NewAnnounce("WarnVulnerable", 1, false)
 
-local warnVuln			= mod:NewAnnounce("WarnVuln", 1)
+mod:AddNamePlateOption("NPAuraOnVulnerable", 22277)
 
 local vulnerabilities = {
-	-- [guid]: {topHit, school}
+	-- [guid] = school
 }
 
 --Constants
 local vulnMobs = {
-	[12460] = "Death Talon Wyrmguard",
-	[12461] = "Death Talon Overseer",
---	[14020] = "Chromaggus",
+	[12460] = true,--"Death Talon Wyrmguard"
+	[12461] = true,--"Death Talon Overseer"
 }
 
 -- https://wow.gamepedia.com/COMBAT_LOG_EVENT
---Why this is coded to use localized names is beyond me
 local spellInfo = {
 	[2] =	{"Holy",	{r=255, g=230, b=128},	"135924"},-- Smite
 	[4] =	{"Fire",	{r=255, g=128, b=0},	"135808"},-- Pyroblast
@@ -38,6 +32,7 @@ local spellInfo = {
 }
 
 local vulnSpells = {
+	--No Holy?
 	[22277] = 4,
 	[22280] = 8,
 	[22278] = 16,
@@ -49,64 +44,83 @@ local vulnSpells = {
 -- in theory this should only alert on a new vulnerability on your target or when you change target
 local function update_vulnerability(self)
 	local target = UnitGUID("target")
-	local tinfo	= vulnerabilities[target]
+	local spellSchool = vulnerabilities[target]
 	local cid = self:GetCIDFromGUID(target)
-	if tinfo == nil or vulnMobs[cid] == nil then
+	if not spellSchool or not vulnMobs[cid] then
 		return
 	end
 
-	local info = spellInfo[tinfo[2]]
+	local info = spellInfo[spellSchool]
 	if not info then return end
 	local name = L[info[1]] or info[1]
 
 	warnVuln.icon = info[3]
-	warnVuln:Show(name)
+	if self:AntiSpam(3, name) then
+		warnVuln:Show(name)
+	end
+	if self.Options.NPAuraOnVulnerable then
+		DBM.Nameplate:Hide(true, target, 22277, 135924)
+		DBM.Nameplate:Hide(true, target, 22277, 135808)
+		DBM.Nameplate:Hide(true, target, 22277, 136006)
+		DBM.Nameplate:Hide(true, target, 22277, 135846)
+		DBM.Nameplate:Hide(true, target, 22277, 136197)
+		DBM.Nameplate:Hide(true, target, 22277, 136096)
+		DBM.Nameplate:Show(true, target, 22277, tonumber(info[3]))
+	end
 end
 
-local function check_spell_damage(self, target, amount, spellSchool, periodic)
-	local topVulnHit = vulnerabilities[target] and vulnerabilities[target][1] or 700
-	if amount > topVulnHit then
-		DBM:Debug("Update vuln "..tostring(amount)..' > '..tostring(topVulnHit)..' '..tostring(target))
-		vulnerabilities[target] = {amount, spellSchool}
-		update_vulnerability(self)
+local function check_spell_damage(self, target, amount, spellSchool, critical)
+	if amount > (critical and 1400 or 700) then
+		if not vulnerabilities[target] or vulnerabilities[target] ~= spellSchool then
+			vulnerabilities[target] = spellSchool
+			update_vulnerability(self)
+		end
 	end
 end
 
 local function check_target_vulns(self)
 	local target = UnitGUID("target")
 	local cid = self:GetCIDFromGUID(target)
-	if vulnMobs[cid] == nil then
+	if not vulnMobs[cid] then
 		return
 	end
 
-	--for i = 1, 32 do
-		--local spellId = select(10, UnitBuff('target', i))
-		local spellId = select(10, DBM:UnitBuff("target", 22277, 22280, 22278, 22279, 22281)) or 0
-		local vulnSchool = vulnSpells[spellId]
-		if vulnSchool ~= nil then
-			return check_spell_damage(self, target, 10000, vulnSchool, false)
-		end
-	--end
+	local spellId = select(10, DBM:UnitBuff("target", 22277, 22280, 22278, 22279, 22281)) or 0
+	local vulnSchool = vulnSpells[spellId]
+	if vulnSchool then
+		return check_spell_damage(self, target, 10000, vulnSchool)
+	end
 end
 
 function mod:OnCombatStart()
 	table.wipe(vulnerabilities)
-	check_target_vulns(self)
+	if self.Options.WarnVulnerable then--Don't register high cpu combat log events if option isn't enabled
+		self:RegisterShortTermEvents(
+			"SPELL_DAMAGE",
+			"PLAYER_TARGET_CHANGED"
+		)
+		check_target_vulns(self)
+		if self.Options.NPAuraOnVulnerable then
+			DBM:FireEvent("BossMod_EnableHostileNameplates")
+		end
+	end
 end
 
 function mod:OnCombatEnd()
 	table.wipe(vulnerabilities)
+	self:UnregisterShortTermEvents()
+	if self.Options.NPAuraOnVulnerable  then
+		DBM.Nameplate:Hide(true, nil, nil, nil, true, true)--isGUID, unit, spellId, texture, force, isHostile, isFriendly
+	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount)
-	check_spell_damage(self, destGUID, amount, spellSchool, false)
-end
-
-function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount)
-	check_spell_damage(self, destGUID, amount, spellSchool, true)
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, _, _, spellSchool, amount, _, _, _, _, _, critical)
+	check_spell_damage(self, destGUID, amount, spellSchool, critical)
 end
 
 function mod:PLAYER_TARGET_CHANGED()
 	check_target_vulns(self)
-	update_vulnerability(self)
+	if self:AntiSpam(3, 1) then--if player is a rapid target tabber (such as dotter), don't spam them
+		update_vulnerability(self)
+	end
 end

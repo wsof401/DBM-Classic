@@ -81,10 +81,10 @@ L:SetGeneralLocalization{
 	name = "Talon Guards"
 }
 L:SetWarningLocalization{
-	WarnVuln		= "%s Vulnerability"
+	WarnVulnerable		= "%s Vulnerability"
 }
 L:SetOptionLocalization{
-	WarnVuln		= "Show warning for spell vulnerabilities"
+	WarnVulnerable		= "Show warning for spell vulnerabilities"
 }
 L:SetMiscLocalization{
 	Fire		= "Fire",
@@ -106,7 +106,7 @@ L:SetGeneralLocalization{
 }
 L:SetWarningLocalization{
 	WarnBreath		= "%s",
-	WarnVuln		= "%s Vulnerability"
+	WarnVulnerable	= "%s Vulnerability"
 }
 L:SetTimerLocalization{
 	TimerBreathCD	= "%s CD",
@@ -115,7 +115,7 @@ L:SetTimerLocalization{
 }
 L:SetOptionLocalization{
 	WarnBreath		= "Show warning when Chromaggus casts one of his Breaths",
-	WarnVuln		= "Show warning for spell vulnerabilities",
+	WarnVulnerable	= "Show warning for spell vulnerabilities",
 	TimerBreathCD	= "Show Breath CD",
 	TimerBreath		= "Show Breath cast",
 	TimerVulnCD		= "Show Vulnerability CD"
