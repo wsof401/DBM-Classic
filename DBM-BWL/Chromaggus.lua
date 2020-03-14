@@ -102,6 +102,7 @@ local function update_vulnerability(self)
 		DBM.Nameplate:Hide(true, target, 22277, 136096)
 		DBM.Nameplate:Show(true, target, 22277, tonumber(info[3]))
 	end
+	self:UnregisterShortTermEvents()--Unregister SPELL_DAMAGE until next shimmer emote
 end
 
 local function check_spell_damage(self, target, amount, spellSchool, critical)
@@ -320,6 +321,11 @@ function mod:OnSync(msg, Name)
 	elseif msg == "Vulnerable" then
 		timerVuln:Start()
 		table.wipe(vulnerabilities)
-		check_target_vulns(self)
+		if self.Options.WarnVulnerable then
+			self:RegisterShortTermEvents(
+				"SPELL_DAMAGE"
+			)
+			check_target_vulns(self)
+		end
 	end
 end
