@@ -100,8 +100,8 @@ function mod:CHAT_MSG_MONSTER_EMOTE(msg)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if ((msg == L.YellEgg1 or msg:find(L.YellEgg1)) 
-	or (msg == L.YellEgg2 or msg:find(L.YellEgg2)) 
+	if ((msg == L.YellEgg1 or msg:find(L.YellEgg1))
+	or (msg == L.YellEgg2 or msg:find(L.YellEgg2))
 	or (msg == L.YellEgg3) or msg:find(L.YellEgg3))
 	and self.vb.phase < 2 then
 		self.vb.eggsLeft = self.vb.eggsLeft - 2
