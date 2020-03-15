@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Razorgore", "DBM-BWL", 1)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("@file-date-integer@")
+mod:SetRevision("20200217192345")
 mod:SetCreatureID(12435, 99999)--Bogus detection to prevent invalid kill detection if razorgore happens to die in phase 1
 mod:SetEncounterID(610)--BOSS_KILL is valid, but ENCOUNTER_END is not
 mod:DisableEEKillDetection()--So disable only EE
@@ -17,6 +17,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_SUCCESS 23040 19873",
 	"SPELL_AURA_APPLIED 23023",
 	"CHAT_MSG_MONSTER_EMOTE",
+	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_DIED"
 )
 
@@ -24,6 +25,7 @@ mod:RegisterEventsInCombat(
 local warnPhase2			= mod:NewPhaseAnnounce(2)
 local warnFireballVolley	= mod:NewCastAnnounce(22425, 3)
 local warnConflagration		= mod:NewTargetNoFilterAnnounce(23023, 2)
+local warnEggsLeft			= mod:NewAnnounce("WarnEggsLeft", 2, "136116")
 --local warnEggsLeft		= mod:NewCountAnnounce(19873, 1)--Not reliable in current form, can't rely on cast of egg breaking do to both CLEU reporting issues
 
 local specWarnFireballVolley= mod:NewSpecialWarningMoveTo(22425, false, nil, nil, 2, 2)
@@ -94,6 +96,16 @@ end
 function mod:CHAT_MSG_MONSTER_EMOTE(msg)
 	if (msg == L.Phase2Emote or msg:find(L.Phase2Emote)) and self.vb.phase < 2 then
 		self:SendSync("Phase2")
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(msg)
+	if ((msg == L.YellEgg1 or msg:find(L.YellEgg1)) 
+	or (msg == L.YellEgg2 or msg:find(L.YellEgg2)) 
+	or (msg == L.YellEgg3) or msg:find(L.YellEgg3))
+	and self.vb.phase < 2 then
+		self.vb.eggsLeft = self.vb.eggsLeft - 2
+		warnEggsLeft:Show(self.vb.eggsLeft)
 	end
 end
 
