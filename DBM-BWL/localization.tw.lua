@@ -71,6 +71,32 @@ L:SetGeneralLocalization{
 	name = "弗萊格爾"
 }
 
+
+-----------------------
+--  Vulnerabilities  --
+-----------------------
+-- Chromaggus, Death Talon Overseer and Death Talon Wyrmguard
+L = DBM:GetModLocalization("TalonGuards")
+
+L:SetGeneralLocalization{
+	name = "龍人護衛"
+}
+L:SetWarningLocalization{
+	WarnVulnerable		= "%s 弱點"
+}
+L:SetOptionLocalization{
+	WarnVulnerable		= "爲法術弱點顯示警告"
+}
+L:SetMiscLocalization{
+	Fire		= "火焰",
+	Nature		= "自然",
+	Frost		= "冰霜",
+	Shadow		= "暗影",
+	Arcane		= "祕法",
+	Holy		= "神聖"
+}
+
+
 ------------------
 --  Chromaggus  --
 ------------------
@@ -80,7 +106,8 @@ L:SetGeneralLocalization{
 	name = "克洛瑪古斯"
 }
 L:SetWarningLocalization{
-	WarnBreath		= "%s"
+	WarnBreath		= "%s",
+	WarnVulnerable	= "%s 弱點"
 }
 L:SetTimerLocalization{
 	TimerBreathCD	= "%s 冷卻",
@@ -89,6 +116,7 @@ L:SetTimerLocalization{
 }
 L:SetOptionLocalization{
 	WarnBreath		= "為克洛瑪古斯其中一個吐息顯示警告",
+	WarnVulnerable	= "爲法術弱點顯示警告",
 	TimerBreathCD	= "顯示吐息冷卻",
 	TimerBreath		= "顯示吐息施放",
 	TimerVulnCD		= "顯示弱點冷卻"
@@ -96,7 +124,13 @@ L:SetOptionLocalization{
 L:SetMiscLocalization{
 	Breath1	= "第一次吐息",
 	Breath2	= "第二次吐息",
-	VulnEmote	= "克洛瑪古斯因皮膚閃著微光而驚訝退縮。"
+	VulnEmote	= "克洛瑪古斯因皮膚閃著微光而驚訝退縮。",
+	Fire		= "火焰",
+	Nature		= "自然",
+	Frost		= "冰霜",
+	Shadow		= "暗影",
+	Arcane		= "祕法",
+	Holy		= "神聖"
 }
 
 ----------------
