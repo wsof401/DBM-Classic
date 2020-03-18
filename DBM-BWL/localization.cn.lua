@@ -20,6 +20,9 @@ L:SetOptionLocalization{
 }
 L:SetMiscLocalization{
 	Phase2Emote	= "在宝珠的控制力消失的瞬间，奈法利安的部队逃走了。",
+  YellEgg1 = "You'll pay for forcing me to do this!", -- needs localized resource
+  YellEgg2 = "Fools! These eggs are more precious than you know!", -- needs localized resource
+  YellEgg3 = "No - not another one! I'll have your heads for this atrocity!", -- needs localized resource
 	YellPull 	= "入侵者闯进了孵化间！我们要不惜一切代价保护龙蛋！"
 }
 -------------------
