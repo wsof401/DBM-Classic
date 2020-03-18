@@ -25,8 +25,7 @@ mod:RegisterEventsInCombat(
 local warnPhase2			= mod:NewPhaseAnnounce(2)
 local warnFireballVolley	= mod:NewCastAnnounce(22425, 3)
 local warnConflagration		= mod:NewTargetNoFilterAnnounce(23023, 2)
-local warnEggsLeft			= mod:NewAnnounce("WarnEggsLeft", 2, "136116")
---local warnEggsLeft		= mod:NewCountAnnounce(19873, 1)--Not reliable in current form, can't rely on cast of egg breaking do to both CLEU reporting issues
+local warnEggsLeft			= mod:NewCountAnnounce(19873, 1)
 
 local specWarnFireballVolley= mod:NewSpecialWarningMoveTo(22425, false, nil, nil, 2, 2)
 
@@ -39,7 +38,6 @@ function mod:OnCombatStart(delay)
 	timerAddsSpawn:Start()
 	self.vb.phase = 1
 	self.vb.eggsLeft = 30
-	DBM:AddMsg("Fireball Volley: 17.8-39.8 (Stage 2). Timers for this wouldn't be very helpful")
 end
 
 do
