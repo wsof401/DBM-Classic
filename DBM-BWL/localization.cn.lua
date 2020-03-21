@@ -127,7 +127,7 @@ L:SetOptionLocalization{
 L:SetMiscLocalization{
 	Breath1	= "第一次吐息",
 	Breath2	= "第二次吐息",
-	VulnEmote	= "%s的皮肤闪着微光，它畏缩了。"
+	VulnEmote	= "%s的皮肤闪着微光，它畏缩了。",
 	Fire		= "火焰",
 	Nature		= "自然",
 	Frost		= "冰霜",
