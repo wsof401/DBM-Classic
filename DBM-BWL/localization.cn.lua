@@ -22,7 +22,7 @@ L:SetMiscLocalization{
 	Phase2Emote	= "在宝珠的控制力消失的瞬间，奈法利安的部队逃走了。",
 	YellEgg1	= "你要为强迫我这么做而付出代价！",
 	YellEgg2	= "蠢货！这些蛋比你认为的要珍贵的多！", -- needs localized resource
-	YellEgg3	= "不！住手！我要你的头颅来弥补你的罪行！", 
+	YellEgg3	= "不！住手！我要你的头颅来弥补你的罪行！",
 	YellPull	= "入侵者闯进了孵化间！我们要不惜一切代价保护龙蛋！"
 }
 -------------------
@@ -110,7 +110,7 @@ L:SetGeneralLocalization{
 	name = "克洛玛古斯"
 }
 L:SetWarningLocalization{
-	WarnBreath		= "%s"
+	WarnBreath		= "%s",
 	WarnVulnerable	= "%s 弱点"
 }
 L:SetTimerLocalization{
