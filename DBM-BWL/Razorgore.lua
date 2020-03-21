@@ -96,7 +96,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 	or (msg == L.YellEgg3) or msg:find(L.YellEgg3))
 	and self.vb.phase < 2 then
 		self.vb.eggsLeft = self.vb.eggsLeft - 2
-		warnEggsLeft:Show(self.vb.eggsLeft)
+		warnEggsLeft:Show(string.format("%d/%d",30-self.vb.eggsLeft,30))
 	end
 end
 
