@@ -6,15 +6,15 @@ mod:SetCreatureID(12435, 99999)--Bogus detection to prevent invalid kill detecti
 mod:SetEncounterID(610)--BOSS_KILL is valid, but ENCOUNTER_END is not
 mod:DisableEEKillDetection()--So disable only EE
 mod:SetModelID(10115)
-mod:SetHotfixNoticeRev(20200212000000)--2020, Feb, 12th
-mod:SetMinSyncRevision(20200212000000)--2020, Feb, 12th
+mod:SetHotfixNoticeRev(20200320000000)--2020, March, 20th
+mod:SetMinSyncRevision(20200320000000)--2020, March, 20th
 
 mod:RegisterCombat("yell", L.YellPull)
 mod:SetWipeTime(180)--guesswork
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 22425",
-	"SPELL_CAST_SUCCESS 23040 19873",
+	"SPELL_CAST_SUCCESS 23040",
 	"SPELL_AURA_APPLIED 23023",
 	"CHAT_MSG_MONSTER_EMOTE",
 	"CHAT_MSG_MONSTER_YELL",
@@ -61,18 +61,11 @@ do
 end
 
 do
-	local warmingFlames, destroyEgg = DBM:GetSpellInfo(23040), DBM:GetSpellInfo(19873)
+	local warmingFlames = DBM:GetSpellInfo(23040)
 	function mod:SPELL_CAST_SUCCESS(args)
 		--if args.spellId == 23023 and args:IsDestTypePlayer() then
 		if args.spellName == warmingFlames and self.vb.phase < 2 then
 			self:SendSync("Phase2")
-		elseif args.spellName == destroyEgg then--Reflects cast succeeding but not how many eggs are destroyed
-			--Not synced because latency would screw this all up
-			self.vb.eggsLeft = self.vb.eggsLeft - 1
-			DBM:Debug("Eggs Remaining: " .. self.vb.eggsLeft)
-			--if (self.vb.eggsLeft % 5 == 0) or self.vb.eggsLeft < 5 then
-			--	warnEggsLeft:Show(self.vb.eggsLeft)
-			--end
 		end
 	end
 end
