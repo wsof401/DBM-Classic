@@ -44,7 +44,6 @@ end
 
 do
 	local FlameBreath = DBM:GetSpellInfo(23461)
-	print(FlameBreath)
 	function mod:SPELL_CAST_START(args)
 		--if args.spellId == 23461 then
 		if args.spellName == FlameBreath then
