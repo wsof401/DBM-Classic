@@ -17,9 +17,9 @@ L:SetOptionLocalization{
 }
 L:SetMiscLocalization{
 	Phase2Emote	= "奈法利安的部隊在寶珠的控制力消失之前逃走。",
-  YellEgg1 = "You'll pay for forcing me to do this!", -- needs localized resource
-  YellEgg2 = "Fools! These eggs are more precious than you know!", -- needs localized resource
-  YellEgg3 = "No - not another one! I'll have your heads for this atrocity!", -- needs localized resource
+	YellEgg1	= "你會為此付出代價！",
+	YellEgg2	= "蠢貨！這些蛋比你想像的還要珍貴！",
+	YellEgg3	= "不！不行！我要拿你的頭來彌補這種暴行！",
 	YellPull 	= "入侵者闖進孵化室了！拉響警報！無論如何都要保護蛋！"
 }
 -------------------
@@ -28,7 +28,7 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization("Vaelastrasz")
 
 L:SetGeneralLocalization{
-	name	= "墮落的瓦拉斯塔茲"
+	name = "墮落的瓦拉斯塔茲"
 }
 
 L:SetMiscLocalization{
@@ -40,7 +40,7 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization("Broodlord")
 
 L:SetGeneralLocalization{
-	name	= "勒西雷爾"
+	name = "勒西雷爾"
 }
 
 L:SetMiscLocalization{
@@ -160,13 +160,13 @@ L:SetMiscLocalization{
 	YellP1		= "讓賽事開始吧！",
 	YellP2		= "幹得好，手下們。凡人的勇氣開始消退了！現在，我們就來看看他們怎麼面對黑石之王的力量吧！",
 	YellP3		= "不可能！來吧，我的僕人！再次為你們的主人服務！",
-    YellShaman  = "薩滿，讓我看看你圖騰到底是什麼用處的！",
-    YellPaladin = "聖騎士……聽說你有無數條命。讓我看看到底是怎麼樣的吧。",
-    YellDruid   = "德魯伊和你們愚蠢的變形。讓我們看看什麼會發生吧！",
-    YellPriest  = "牧師！如果你要繼續這麼治療的話，那我們來玩點有趣的東西！",
-    YellWarrior = "戰士，我知道你應該比較抗打！讓我們來見識一下吧！",
-    YellRogue   = "盜賊？不要躲了，面對我吧！",
-    YellWarlock = "術士，不要隨便去玩那些你不理解的法術。看看會發生什麼吧？",
-    YellHunter  = "獵人和你那討厭的豌豆射擊！",
-    YellMage    = "還有法師？你應該小心使用你的魔法……"
+	YellShaman	= "薩滿，讓我看看你圖騰到底是什麼用處的！",
+	YellPaladin	= "聖騎士……聽說你有無數條命。讓我看看到底是怎麼樣的吧。",
+	YellDruid	= "德魯伊和你們愚蠢的變形。讓我們看看什麼會發生吧！",
+	YellPriest	= "牧師！如果你要繼續這麼治療的話，那我們來玩點有趣的東西！",
+	YellWarrior	= "戰士，我知道你應該比較抗打！讓我們來見識一下吧！",
+	YellRogue	= "盜賊？不要躲了，面對我吧！",
+	YellWarlock	= "術士，不要隨便去玩那些你不理解的法術。看看會發生什麼吧？",
+	YellHunter	= "獵人和你那討厭的豌豆射擊！",
+	YellMage	= "還有法師？你應該小心使用你的魔法……"
 }
