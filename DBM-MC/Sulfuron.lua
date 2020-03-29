@@ -13,7 +13,7 @@ mod:RegisterEventsInCombat(
 )
 
 --TODO, nameplate aura if classic API supports it enough
-local warnInspire		= mod:NewTargetAnnounce(19779, 2, nil, "Tank|Healer")
+local warnInspire		= mod:NewTargetNoFilterAnnounce(19779, 2, nil, "Tank|Healer")
 local warnHandRagnaros	= mod:NewTargetAnnounce(19780, 2, nil, false, 2)
 local warnShadowPain	= mod:NewTargetAnnounce(19776, 2, nil, false, 2)
 local warnImmolate		= mod:NewTargetAnnounce(20294, 2, nil, false, 2)

@@ -163,6 +163,7 @@ do
 			if self:AntiSpam(15, 1) then
 				warnBreath:Show(args.spellName)
 				timerBreath:Start(2, args.spellName)
+				timerBreath:UpdateIcon(spellIcons[args.spellName])
 				timerBreathCD:Start(60, args.spellName)
 				timerBreathCD:UpdateIcon(spellIcons[args.spellName])
 			end
